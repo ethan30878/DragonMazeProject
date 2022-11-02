@@ -12,7 +12,8 @@ public class DragonMaze {
 	private GamePiece dragon;
 	
 	public DragonMaze() {
-		
+		rand = new Random(System.currentTimeMillis());
+		board = new GameBoard(GameBoard.MAZE_STR);
 	}
 	@SuppressWarnings("unused")
 	private void reset() {

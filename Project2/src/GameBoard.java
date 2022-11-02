@@ -7,9 +7,14 @@ public class GameBoard {
 	private int numRows;
 	private int numCols;
 	private char[][] board;
+	final String MAZE_STR = "";
 	
-	public GameBoard(String boardSTR) {
-		
+	public GameBoard(String boardStr) {
+		String[] mazeArray = boardStr.split("\n");
+		numRows = mazeArray.length;
+		numCol = mazeArray[0].length();
+		for (String line : mazeArray)
+			System.out.println(line);
 	}
 	public void setCharAt(GamePiece piece, char newSymbol) {
 		
