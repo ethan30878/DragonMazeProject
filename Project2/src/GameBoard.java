@@ -12,9 +12,14 @@ public class GameBoard {
 	public GameBoard(String boardStr) {
 		String[] mazeArray = boardStr.split("\n");
 		numRows = mazeArray.length;
-		numCol = mazeArray[0].length();
-		for (String line : mazeArray)
-			System.out.println(line);
+		numCols = mazeArray[0].length();
+		board = new char[numRows][numCols];
+		for (int i = 0; i < numRows; i++) {
+			board[i] = mazeArray[i].toCharArray();
+			for (int j = 0; j < numCols; j++) {
+				
+			}
+		}
 	}
 	public void setCharAt(GamePiece piece, char newSymbol) {
 		
@@ -26,7 +31,9 @@ public class GameBoard {
 		return -1;
 	}
 	public String toString() {
-		return null;
+		StringBuilder output = new StringBuilder();
+
+		return output.toString();
 	}
 	public GamePiece findGamePiece(char symbol) {
 		return null;

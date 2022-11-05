@@ -3,6 +3,7 @@
 * Date: 30 October, 2022
 * Program Description: Main class harboring the loading & printing of the maze, movement, etc. */
 import java.util.Random;
+import java.io.*;
 public class DragonMaze {
 	
 	private Random rand;
@@ -13,7 +14,10 @@ public class DragonMaze {
 	
 	public DragonMaze() {
 		rand = new Random(System.currentTimeMillis());
-		board = new GameBoard(GameBoard.MAZE_STR);
+		board = null;
+		hero = new GamePiece();
+		princess = new GamePiece();
+		dragon = new GamePiece();
 	}
 	@SuppressWarnings("unused")
 	private void reset() {
@@ -23,11 +27,18 @@ public class DragonMaze {
 	private GamePiece makeMove(GamePiece from, GamePiece to) {
 		return null;
 	}
-	public boolean loadMazeFile(String filname) {
+	public boolean loadMazeFile(String fileName) {
+		BufferedReader in = new BufferedReader(new FileReader(fileName));
+		StringBuilder boardSTR = new StringBuilder();
+		while (in.ready())
+			boardSTR.append(in.readline() + '\n');
+		in.close();
+	//	System.out.println(boardSTR);
+		board = new GameBoard(boardSTR.toString());
 		return true;
 	}
 	public void printMaze() {
-		
+		System.out.println(board);
 	}
 	public boolean moveHero(String direction) {
 		return true;
