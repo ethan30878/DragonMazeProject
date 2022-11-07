@@ -27,13 +27,13 @@ public class DragonMaze {
 	private GamePiece makeMove(GamePiece from, GamePiece to) {
 		return null;
 	}
-	public boolean loadMazeFile(String fileName) {
+	public boolean loadMazeFile(String fileName) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		StringBuilder boardSTR = new StringBuilder();
 		while (in.ready())
-			boardSTR.append(in.readline() + '\n');
+			boardSTR.append(in.readLine() + '\n');
 		in.close();
-	//	System.out.println(boardSTR);
+		System.out.println(boardSTR);
 		board = new GameBoard(boardSTR.toString());
 		return true;
 	}
@@ -41,6 +41,8 @@ public class DragonMaze {
 		System.out.println(board);
 	}
 	public boolean moveHero(String direction) {
+		// if player choice is to move, return true
+		// if choice is to stay, return false
 		return true;
 	}
 	public boolean moveDragon() {

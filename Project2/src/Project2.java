@@ -3,6 +3,7 @@
 * Date: 4 November, 2022
 * Program Description: Executes maze games. */
 import java.util.Scanner;
+import java.io.*;
 
 public class Project2 {
 
@@ -11,7 +12,7 @@ public class Project2 {
 		DragonMaze game = new DragonMaze();
 		String mazeFile = "";
 		if (args.length > 0) {
-			;
+			mazeFile = args[0];
 		} else {
 			System.out.println("No command line argument entered. Please enter the name of the maze file: ");
 			mazeFile = input.nextLine();
@@ -19,6 +20,7 @@ public class Project2 {
 		System.out.println("Reading file: " + mazeFile);
 		game.loadMazeFile(mazeFile);
 		game.printMaze();
+		input.close();
 	}
 
 }

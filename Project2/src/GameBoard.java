@@ -16,9 +16,6 @@ public class GameBoard {
 		board = new char[numRows][numCols];
 		for (int i = 0; i < numRows; i++) {
 			board[i] = mazeArray[i].toCharArray();
-			for (int j = 0; j < numCols; j++) {
-				
-			}
 		}
 	}
 	public void setCharAt(GamePiece piece, char newSymbol) {
@@ -32,7 +29,9 @@ public class GameBoard {
 	}
 	public String toString() {
 		StringBuilder output = new StringBuilder();
-
+		for (int i = 0; i < numRows; i++)
+			for (int j = 0; j < numCols; j++)
+				output.append(board[i][j]);
 		return output.toString();
 	}
 	public GamePiece findGamePiece(char symbol) {
