@@ -33,12 +33,18 @@ public class DragonMaze {
 		while (in.ready())
 			boardSTR.append(in.readLine() + '\n');
 		in.close();
-		System.out.println(boardSTR);
+	//	System.out.println(boardSTR);
 		board = new GameBoard(boardSTR.toString());
+		hero = board.findGamePiece('h');
+		princess = board.findGamePiece('p');
 		return true;
 	}
 	public void printMaze() {
 		System.out.println(board);
+		System.out.println(hero);
+		System.out.println(princess);
+		System.out.println(dragon);
+		
 	}
 	public boolean moveHero(String direction) {
 		// if player choice is to move, return true
