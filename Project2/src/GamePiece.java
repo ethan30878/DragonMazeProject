@@ -15,9 +15,9 @@ public class GamePiece {
 		pieceCount++;
 	}
 	public GamePiece(GamePiece original) {
-		this.row = original.row;
-		this.col = original.col;
-		this.symbol = original.symbol;
+		row = original.row;
+		col = original.col;
+		symbol = original.symbol;
 		pieceCount++;
 	}
 	public GamePiece(int row, int col, char symbol) {
@@ -27,11 +27,22 @@ public class GamePiece {
 		pieceCount++;
 	}
 	public String toString() {
-		// switch statement
-		return null;
+		String type = "";
+		switch (symbol) {
+		case 'h':
+		case 'H':
+			type = "Hero";
+		case 'D':
+			type = "Dragon";
+		case 'P':
+			type = "Princess";
+		default:
+			type = null;
+		}
+		return type + ": (" + row + ", " + col + ")";
 	}
 	public boolean equals(GamePiece gp) {
-		return true;
+		return (row == gp.row && col == gp.col && symbol == gp.symbol);
 	}
 	public int getRow() {
 		return row;
@@ -41,6 +52,9 @@ public class GamePiece {
 	}
 	public char getSymbol() {
 		return symbol;
+	}
+	public int getPieceCount() {
+		return pieceCount;
 	}
 	public void setSymbol(char symbol) {
 		this.symbol = symbol;
@@ -58,6 +72,17 @@ public class GamePiece {
 		col++;
 	}
 	public boolean adjacentTo(GamePiece check) {
-		return true;
+		GamePiece up = new GamePiece(this);
+		up.moveUp();
+		GamePiece down = new GamePiece(this);
+		down.moveDown();
+		GamePiece left = new GamePiece(this);
+		left.moveLeft();
+		GamePiece right = new GamePiece(this);
+		right.moveRight();
+		return up.equals(check) || left.equals(check) || down.equals(check) || right.equals(check);
+	}
+	public void finalize() {
+		pieceCount--;
 	}
 }

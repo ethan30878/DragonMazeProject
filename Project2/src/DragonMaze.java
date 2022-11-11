@@ -33,14 +33,15 @@ public class DragonMaze {
 		while (in.ready())
 			boardSTR.append(in.readLine() + '\n');
 		in.close();
-	//	System.out.println(boardSTR);
 		board = new GameBoard(boardSTR.toString());
 		hero = board.findGamePiece('h');
-		princess = board.findGamePiece('p');
+		princess = board.findGamePiece('P');
+		dragon = board.findGamePiece('D');
 		return true;
 	}
 	public void printMaze() {
 		System.out.println(board);
+//		System.out.println(hero.getPieceCount() + " pieces in play:");
 		System.out.println(hero);
 		System.out.println(princess);
 		System.out.println(dragon);

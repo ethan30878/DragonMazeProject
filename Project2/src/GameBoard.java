@@ -18,27 +18,32 @@ public class GameBoard {
 			board[i] = mazeArray[i].toCharArray();
 		}
 	}
+	
 	public void setCharAt(GamePiece piece, char newSymbol) {
-		
 	}
+	
 	public char getCharAt(GamePiece piece) {
 		return 0;
 	}
+	
 	public int getRow() {
 		return -1;
 	}
+	
 	public String toString() {
+		
 		StringBuilder output = new StringBuilder();
-		for (char[] row : board)
-			for (char col : row)
+		
+		for (char[] row : board) {
+			for (char col : row) {
 				output.append(col);
+			}
 			output.append("\n");
-//		for (int i = 0; i < numRows; i++)
-//			for (int j = 0; j < numCols; j++)
-//				output.append(board[i][j]);
-//			output.append("\n");
+		}
+		
 		return output.toString();
 	}
+	
 	public GamePiece findGamePiece(char symbol) {
 		return null;
 	}
