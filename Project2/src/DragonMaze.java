@@ -4,6 +4,7 @@
 * Program Description: Main class harboring the loading & printing of the maze, movement, etc. */
 import java.util.Random;
 import java.io.*;
+
 public class DragonMaze {
 	
 	private Random rand;

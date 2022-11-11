@@ -29,15 +29,18 @@ public class GamePiece {
 	public String toString() {
 		String type = "";
 		switch (symbol) {
-		case 'h':
-		case 'H':
-			type = "Hero";
-		case 'D':
-			type = "Dragon";
-		case 'P':
-			type = "Princess";
-		default:
-			type = null;
+			case 'h':
+			case 'H':
+				type = "Hero";
+				break;
+			case 'D':
+				type = "Dragon";
+				break;
+			case 'P':
+				type = "Princess";
+				break;
+			default:
+				type = null;
 		}
 		return type + ": (" + row + ", " + col + ")";
 	}

@@ -30,6 +30,7 @@ public class GameBoard {
 		return -1;
 	}
 	
+	// Returns a string containing the current state of the board.
 	public String toString() {
 		
 		StringBuilder output = new StringBuilder();
@@ -44,7 +45,18 @@ public class GameBoard {
 		return output.toString();
 	}
 	
+	// Finds game piece on the board and creates a game piece object for its data.
 	public GamePiece findGamePiece(char symbol) {
+		char c;
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				c = board[row][col];
+
+				if (c == symbol) {
+					return new GamePiece(row, col, c);
+				}
+			}
+		}
 		return null;
 	}
 }
