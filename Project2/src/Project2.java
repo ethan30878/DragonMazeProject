@@ -19,12 +19,48 @@ public class Project2 {
 			System.out.println("No command line argument entered. Please enter the name of the maze file: ");
 			mazeFile = input.nextLine();
 		}
+		
+		boolean gameOver = false;
+		boolean win = false;
 
 		System.out.println("Reading file: " + mazeFile);
+		game.loadMazeFile(mazeFile); 
+		
+		while (!gameOver) {
 
-		game.loadMazeFile(mazeFile);
-		game.printMaze();
+			// Print the maze
+			game.printMaze();
 
+			// Obtain user input and move the hero
+			switch ((char) input.next().charAt(0)) {
+				case 'w':
+					game.moveHero("up");
+					break;
+				case 'a':
+					game.moveHero("left");
+					break;
+				case 's':
+					game.moveHero("down");
+					break;
+				case 'd':
+					game.moveHero("right");
+					break;
+				default:
+					game.moveHero("");
+					break;
+			}
+
+			// Moves dragon
+			game.moveDragon();
+
+		}
+
+		// Need to make figure out how to set win condition
+		if (win)
+			System.out.println("You won the game! Hooray! :)");
+		else
+			System.out.println("You lost the game! Oh no! :(");
+		
 		input.close();
 	}
 

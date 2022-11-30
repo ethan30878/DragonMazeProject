@@ -6,7 +6,7 @@ public class GameBoard {
 	
 	private int numRows;
 	private int numCols;
-	private char[][] board;
+	char[][] board;
 	final String MAZE_STR = "";
 	
 	public GameBoard(String boardStr) {
@@ -19,15 +19,27 @@ public class GameBoard {
 		}
 	}
 	
-	public void setCharAt(GamePiece piece, char newSymbol) {
+	public boolean setCharAt(GamePiece piece, char newSymbol) {
+		int row = piece.getRow();
+		int col = piece.getCol();
+		if (row >= 0 && row <= numRows && col >= 0 && col < numCols) {
+			board[row][col] = newSymbol;
+			return true;
+		}
+		return false;
 	}
 	
 	public char getCharAt(GamePiece piece) {
-		return 0;
+		int row = piece.getRow();
+		int col = piece.getCol();
+		char charAt = '\0';
+		if (row >= 0 && row <= numRows && col >= 0 && col < numCols)
+			charAt = board[row][col];
+		return charAt;
 	}
 	
 	public int getRow() {
-		return -1;
+		return numRows;
 	}
 	
 	// Returns a string containing the current state of the board.
@@ -47,13 +59,10 @@ public class GameBoard {
 	
 	// Finds game piece on the board and creates a game piece object for its data.
 	public GamePiece findGamePiece(char symbol) {
-		char c;
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
-				c = board[row][col];
-
-				if (c == symbol) {
-					return new GamePiece(row, col, c);
+				if (board[row][col] == symbol) {
+					return new GamePiece(row, col, symbol);
 				}
 			}
 		}
