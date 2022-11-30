@@ -24,10 +24,24 @@ public class DragonMaze {
 	private void reset() {
 		
 	}
-	@SuppressWarnings("unused")
 	private GamePiece makeMove(GamePiece from, GamePiece to) {
-		board.setCharAt(to, from.getSymbol());
-		board.setCharAt(from, ' ');
+	    if (board.getCharAt(to) == ' ' || board.getCharAt(to) == 'P' || board.getCharAt(to) == 'F') {
+	        if (Character.toLowerCase(from.getSymbol()) == 'h') {
+	            if (board.getCharAt(to) == 'P') {
+	                hero.setSymbol('H');
+	            }
+	            if (board.getCharAt(to) == 'F') {
+	                if (hero.getSymbol() == 'H') {
+	                    System.out.println("\n******\nYou win! You saved the princess!\n******\n");
+	                    System.exit(0);
+	                }
+	                System.out.println("\n******\nYou lose! You forgot to get the princess!\n******\n");
+	                System.exit(0);
+	            }
+	        }
+            board.setCharAt(to, from.getSymbol());
+            board.setCharAt(from, ' ');
+        }
 		return to;
 	}
 	public boolean loadMazeFile(String fileName) throws IOException {
@@ -44,14 +58,14 @@ public class DragonMaze {
 	}
 	public void printMaze() {
 		System.out.println(board);
-//		System.out.println(hero.getPieceCount() + " pieces in play:");
+		System.out.println(GamePiece.getPieceCount() + " pieces in play:");
 		System.out.println(hero);
 		System.out.println(princess);
 		System.out.println(dragon);
 		
 	}
 	public boolean moveHero(String direction) {
-		GamePiece ghostHero = new GamePiece();
+		GamePiece ghostHero = new GamePiece(hero);
 		switch (direction) {
 			case "up":
 					ghostHero.moveUp();
@@ -68,19 +82,16 @@ public class DragonMaze {
 			default:
 				return false;
 		}
-		char move = board.getCharAt(ghostHero);
-		if (move == ' ') {
-			board.setCharAt(hero, ' ');
-			board.setCharAt(ghostHero, 'h');
-			hero = ghostHero;
-		}
+		makeMove(hero, ghostHero);
+		hero = board.findGamePiece(hero.getSymbol());
+		ghostHero = null;
 		if (hero.adjacentTo(dragon)) 
 			return false;
 		return true;
 	}
 	public boolean moveDragon() {
 		int randy = rand.nextInt(4);
-		GamePiece ghostDragon = new GamePiece();
+		GamePiece ghostDragon = new GamePiece(dragon);
 		switch (randy) {
 			case 0:
 				ghostDragon.moveUp();
@@ -95,14 +106,12 @@ public class DragonMaze {
 				ghostDragon.moveRight();
 				break;
 			default:
-				System.out.println("*** ERROR! RANDOM INTEGER OUT OF BOUNDS! ***");
+			    // Funny unreachable code
+			    break;
 		}
-		char move = board.getCharAt(ghostDragon);
-		if (move == ' ') {
-			board.setCharAt(dragon, ' ');
-			board.setCharAt(ghostDragon, 'D');
-			dragon = ghostDragon;
-		}
+		makeMove(dragon, ghostDragon);
+		ghostDragon = null;
+        dragon = board.findGamePiece('D');
 		if (dragon.adjacentTo(hero))
 			return false;
 		return true;

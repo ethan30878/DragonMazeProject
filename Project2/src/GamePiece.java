@@ -56,7 +56,7 @@ public class GamePiece {
 	public char getSymbol() {
 		return symbol;
 	}
-	public int getPieceCount() {
+	public static int getPieceCount() {
 		return pieceCount;
 	}
 	public void setSymbol(char symbol) {

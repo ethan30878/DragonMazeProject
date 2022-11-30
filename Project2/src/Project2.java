@@ -56,12 +56,11 @@ public class Project2 {
 		}
 
 		// Need to make figure out how to set win condition
-		if (win)
-			System.out.println("You won the game! Hooray! :)");
-		else
-			System.out.println("You lost the game! Oh no! :(");
+//		if (win)
+//			System.out.println("You won the game! Hooray! :)");
+//		else
+//			System.out.println("You lost the game! Oh no! :(");
 		
 		input.close();
 	}
-
 }
