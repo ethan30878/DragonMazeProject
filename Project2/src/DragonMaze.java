@@ -13,6 +13,9 @@ public class DragonMaze {
 	private GamePiece princess;
 	private GamePiece dragon;
 	
+	/**
+	 * Default constructor for DragonMaze class
+	 */
 	public DragonMaze() {
 		rand = new Random(System.currentTimeMillis());
 		board = null;
@@ -20,10 +23,19 @@ public class DragonMaze {
 		princess = new GamePiece();
 		dragon = new GamePiece();
 	}
-	@SuppressWarnings("unused")
-	private void reset() {
-		
-	}
+	
+//	@SuppressWarnings("unused")
+//	private void reset() {
+//		
+//	}
+	
+	/**
+	 * Checks surroundings and moves the GamePiece to new spot;
+	 * Can also allow user to win or lose game by checking certain conditions
+	 * @param from represents GamePiece in initial position
+	 * @param to represents temporary GamePiece in new position
+	 * @return the temporary GamePiece with new position
+	 */
 	private GamePiece makeMove(GamePiece from, GamePiece to) {
 	    if (board.getCharAt(to) == ' ' || board.getCharAt(to) == 'P' || board.getCharAt(to) == 'F') {
 	        if (Character.toLowerCase(from.getSymbol()) == 'h') {
@@ -44,6 +56,13 @@ public class DragonMaze {
         }
 		return to;
 	}
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean loadMazeFile(String fileName) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
 		StringBuilder boardSTR = new StringBuilder();
@@ -62,7 +81,7 @@ public class DragonMaze {
 		System.out.println(hero);
 		System.out.println(princess);
 		System.out.println(dragon);
-		
+		System.out.println("\nMake your move! Valid moves are W, A, S, D, or F to wait.");
 	}
 	public boolean moveHero(String direction) {
 		GamePiece ghostHero = new GamePiece(hero);
@@ -85,8 +104,6 @@ public class DragonMaze {
 		makeMove(hero, ghostHero);
 		hero = board.findGamePiece(hero.getSymbol());
 		ghostHero = null;
-		if (hero.adjacentTo(dragon)) 
-			return false;
 		return true;
 	}
 	public boolean moveDragon() {
@@ -112,9 +129,14 @@ public class DragonMaze {
 		makeMove(dragon, ghostDragon);
 		ghostDragon = null;
         dragon = board.findGamePiece('D');
-		if (dragon.adjacentTo(hero))
-			return false;
 		return true;
 
+	}
+	public boolean gameOver() {
+	    if (dragon.adjacentTo(hero)) {
+            System.out.println("\n******\nYou lose! The dragon made you his dinner!\n******\n");
+            return true;
+        }
+	    return false;
 	}
 }

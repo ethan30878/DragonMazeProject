@@ -1,12 +1,17 @@
 /* Name: Ethan Glenn
 * File Name: Project2.java
 * Date: 4 November, 2022
-* Program Description: Executes maze game. */
+* Program Description: Executes the maze game and checks for maze file. */
 import java.util.Scanner;
 import java.io.*;
 
 public class Project2 {
-
+    
+    /**
+     * The main method for the primary class of program, effectively checks for maze file, loads, and runs the game
+     * @param args contains the name of the default maze file used
+     * @throws Exception
+     */
 	public static void main(String[] args) throws Exception { // java Project2 maze.txt, Run Config -> maze.txt
 		Scanner input = new Scanner(System.in);
 		DragonMaze game = new DragonMaze();
@@ -21,7 +26,6 @@ public class Project2 {
 		}
 		
 		boolean gameOver = false;
-		boolean win = false;
 
 		System.out.println("Reading file: " + mazeFile);
 		game.loadMazeFile(mazeFile); 
@@ -45,22 +49,21 @@ public class Project2 {
 				case 'd':
 					game.moveHero("right");
 					break;
+				case 'f':
+				    System.out.println("You chose to wait!");
+				    game.moveHero("");
+				    break;
 				default:
+					System.out.println("Invalid input. You automatically waited.");
 					game.moveHero("");
 					break;
 			}
-
 			// Moves dragon
 			game.moveDragon();
-
+			
+			if (game.gameOver() == true)
+			    gameOver = true;
 		}
-
-		// Need to make figure out how to set win condition
-//		if (win)
-//			System.out.println("You won the game! Hooray! :)");
-//		else
-//			System.out.println("You lost the game! Oh no! :(");
-		
 		input.close();
 	}
 }
